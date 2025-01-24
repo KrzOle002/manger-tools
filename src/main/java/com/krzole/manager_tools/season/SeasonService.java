@@ -7,27 +7,31 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class SeasonService {
-    private final SeasonRepository seasonRepository;
 
-    public SeasonService(SeasonRepository seasonRepository) {
-        this.seasonRepository = seasonRepository;
-    }
+  private final SeasonRepository seasonRepository;
 
-    public Page<SeasonResponseDTO> getAllSeasons(Pageable pageable) {
-        return seasonRepository.findAllBy(pageable).map(SeasonEntity::toSeasonResponseDTO);
-    }
+  public SeasonService(SeasonRepository seasonRepository) {
+    this.seasonRepository = seasonRepository;
+  }
 
-    public SeasonEntity add (SeasonRequestDTO seasonRequestDTO) {
-        SeasonEntity season = seasonRepository.save(new SeasonEntity(seasonRequestDTO));
-        return seasonRepository.save(season);
-    }
+  public Page<SeasonResponseDTO> getAllSeasons(Pageable pageable) {
+    return seasonRepository.findAllBy(pageable).map(SeasonEntity::toSeasonResponseDTO);
+  }
 
-    public boolean existsByName (String name) {
-        return seasonRepository.existsByName(name);
-    }
+  public SeasonEntity add(SeasonRequestDTO seasonRequestDTO) {
+    SeasonEntity season = seasonRepository.save(new SeasonEntity(seasonRequestDTO));
+    return seasonRepository.save(season);
+  }
+
+  public boolean existsByName(String name) {
+    return seasonRepository.existsByName(name);
+  }
+
+  public SeasonEntity getSeasonByUID(int seasonUID) {
+    return seasonRepository.findByUid(seasonUID).orElse(null);
+  }
 
 }

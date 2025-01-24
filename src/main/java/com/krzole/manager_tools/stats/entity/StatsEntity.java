@@ -13,9 +13,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
+@Setter
 @Table(name = "stats")
 public class StatsEntity {
 
@@ -40,11 +42,23 @@ public class StatsEntity {
   private PlayerEntity player;
 
   @ManyToOne()
-  @JoinColumn(name = "idSeason", referencedColumnName = "id")
+  @JoinColumn(name = "idSeason", referencedColumnName = "uid")
   private SeasonEntity season;
 
   public StatsEntity(StatsRequestDTO statsRequestDTO) {
     this.age = statsRequestDTO.age();
+    this.shirtNumber = statsRequestDTO.shirtNumber();
+    this.position = statsRequestDTO.position();
+    this.rating = statsRequestDTO.rating();
+    this.skillStars = statsRequestDTO.skillStars();
+    this.weakFoot = statsRequestDTO.weakFoot();
+    this.pace = statsRequestDTO.pace();
+    this.shooting = statsRequestDTO.shooting();
+    this.passing = statsRequestDTO.passing();
+    this.dribbling = statsRequestDTO.dribbling();
+    this.defending = statsRequestDTO.defending();
+    this.physical = statsRequestDTO.physical();
+
   }
 
   public StatsEntity() {
@@ -53,7 +67,6 @@ public class StatsEntity {
 
   public StatsResponseDTO toStatsResponseDTO() {
     return new StatsResponseDTO(id, shirtNumber, age, position, rating, skillStars,
-        weakFoot, pace, shooting, passing, dribbling, defending, physical,
-        player, season);
+        weakFoot, pace, shooting, passing, dribbling, defending, physical);
   }
 }

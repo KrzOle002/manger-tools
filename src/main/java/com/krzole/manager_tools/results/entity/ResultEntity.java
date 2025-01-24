@@ -12,9 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
+@Setter
 @Table(name = "results")
 public class ResultEntity {
 
@@ -32,7 +34,7 @@ public class ResultEntity {
   private PlayerEntity player;
 
   @ManyToOne()
-  @JoinColumn(name = "idSeason", referencedColumnName = "id")
+  @JoinColumn(name = "idSeason", referencedColumnName = "uid")
   private SeasonEntity season;
 
   public ResultEntity(ResultRequestDTO resultRequestDTO) {
@@ -56,7 +58,8 @@ public class ResultEntity {
         assists,
         cleanSheets,
         yellowCards,
-        redCards, player, season, id);
+        redCards,
+        id);
   }
 }
 

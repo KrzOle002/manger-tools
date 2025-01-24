@@ -12,9 +12,11 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Entity
+@Setter
 @Table(name = "contracts")
 public class ContractEntity {
 
@@ -32,7 +34,7 @@ public class ContractEntity {
   private PlayerEntity player;
 
   @ManyToOne()
-  @JoinColumn(name = "idSeason", referencedColumnName = "id")
+  @JoinColumn(name = "idSeason", referencedColumnName = "uid")
   private SeasonEntity season;
 
   public ContractEntity(ContractRequestDTO requestDTO) {
@@ -50,7 +52,7 @@ public class ContractEntity {
   }
 
   public ContractResponseDTO toContractResponseDTO() {
-    return new ContractResponseDTO(id, player, season, playerValue, playerWage, clubName,
+    return new ContractResponseDTO(id, playerValue, playerWage, clubName,
         clubNationality, clubDivision);
   }
 

@@ -8,8 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Entity
 @Table(name = "seasons")
 public class SeasonEntity {
@@ -25,8 +27,6 @@ public class SeasonEntity {
     this.uid = uid;
   }
 
-  ;
-
   public SeasonEntity(SeasonRequestDTO seasonRequestDTO) {
     this.name = seasonRequestDTO.name();
     this.uid = seasonRequestDTO.uid();
@@ -34,8 +34,6 @@ public class SeasonEntity {
 
   public SeasonEntity() {
   }
-
-  ;
 
   public SeasonResponseDTO toSeasonResponseDTO() {
     return new SeasonResponseDTO(id, name, uid);
